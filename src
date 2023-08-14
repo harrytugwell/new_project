@@ -1,1 +1,67 @@
+'''
+(please update this docstring)
 
+Please implement MiddlePlayer and QuartilePlayer here. 
+
+Player is already implemented and please do not change its code unless it is necessary
+'''
+
+import random 
+
+class Player:
+    '''
+    An instance of this class plays the number guessing game by selecting an integer randomly 
+    within the possible range of integers
+    '''
+    def __init__(self, m):
+        '''
+        m: maximum value for the range of integers to guess
+        '''
+        self._max = m
+        self._min = 1
+        self._record = []
+        self._reset() # initialise the game values
+    
+    def guess(self):
+        '''
+        return: a random integer within the possible range of integers
+        '''
+        self._guess = random.randint(self._lower, self._upper)
+        return self._guess
+    
+    def outcome(self, textual_outcome):
+        '''
+        a method used to inform the player the outcome of its guess
+
+        textual_outcome: str, three possible values: 'too high', 'too low', 'correct'
+            'too high' if the previous guess is higher than the true value
+            'too low' if the previous guess is lower than the true value
+            'correct' if the previous guess is equal to the true value
+            Assume the string provided is always one of the three possible values
+        return: None
+        '''
+        self._current_cnt += 1
+        if textual_outcome == 'too high':
+            self._upper = self._guess - 1
+        elif textual_outcome == 'too low':
+            self._lower = self._guess + 1
+        else: # i.e. textual_outcome == 'correct'
+            self._record.append(self._current_cnt)
+            self._reset()
+    
+    def _reset(self):
+        '''
+        helper method to reset internal values so that the game is ready for the next round
+        '''
+        self._lower = self._min
+        self._upper = self._max
+        self._current_cnt = 0
+            
+    def record(self, n):
+        '''
+        Get the number of guesses made in the past n rounds
+        n: non-zero integer
+            the number of rounds of results should be returned. Assume at last n rounds have been played
+        return: list of non-zero integers
+        '''
+        return self._record.copy()[-n:]
