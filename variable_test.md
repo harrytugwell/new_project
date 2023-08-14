@@ -1,4 +1,4 @@
-# Q1: Variable name via functional programming (25 marks)
+# Q1: Variable name via functional programming 
 
 ---
 
