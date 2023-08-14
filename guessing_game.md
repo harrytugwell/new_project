@@ -1,4 +1,4 @@
-# Q3a Number guessing game (30 marks)
+# Q3a Number guessing game 
 
 ---
 ## Background
